@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace Calculator
@@ -24,47 +25,75 @@ namespace Calculator
             double value1, value2;
             string operation;
 
-            Console.WriteLine("Enter the first value: ");
-            value1 = double.Parse(Console.ReadLine());
-
-            Console.WriteLine("Enter the operation: ");
-            operation = Console.ReadLine();
-
-            Console.WriteLine("Enter the second value: ");
-            value2 = double.Parse(Console.ReadLine());
-
-            Console.WriteLine("");
-
-            switch (operation)
+            try
             {
-                case "+":
-                    Sum(value1, value2);
-                    break;
-
-                case "-":
-                    Subtraction(value1, value2);
-                    break;
-
-                case "*":
-                    Multiplication(value1, value2);
-                    break;
-
-                case "/":
-                    Divide(value1, value2);
-                    break;
-
-                case "%":
-                    Modulo(value1, value2);
-                    break;
-
-                default:
-                    Console.WriteLine("Non-existent option!");
-                    Console.ReadKey();
+                Console.WriteLine("Enter the first value: ");
+                if (!double.TryParse(Console.ReadLine(), out value1))
+                {
+                    Console.WriteLine("Invalid Number! Press any key to continue");
+                    Console.ReadLine();
+                    Console.Clear();
                     Menu();
-                    break;
+                }
+                Console.WriteLine("Enter the operation: ");
+                operation = Console.ReadLine();
+                if (operation.Length != 1 || !Regex.IsMatch(operation, "^([-+\\/*%])", RegexOptions.IgnoreCase))
+                {
+                    Console.WriteLine("Invalid operator! Press any key to continue");
+                    Console.ReadLine();
+                    Console.Clear();
+                    Menu();
+                }
 
+
+                Console.WriteLine("Enter the second value: ");
+                if (!double.TryParse(Console.ReadLine(), out value2))
+                {
+                    Console.WriteLine("Invalid Number! Press any key to continue");
+                    Console.ReadLine();
+                    Console.Clear();
+                    Menu();
+                }
+
+
+                Console.WriteLine("");
+
+                switch (operation)
+                {
+                    case "+":
+                        Sum(value1, value2);
+                        break;
+
+                    case "-":
+                        Subtraction(value1, value2);
+                        break;
+
+                    case "*":
+                        Multiplication(value1, value2);
+                        break;
+
+                    case "/":
+                        Divide(value1, value2);
+                        break;
+
+                    case "%":
+                        Modulo(value1, value2);
+                        break;
+
+                    default:
+                        Console.WriteLine("Non-existent option!");
+                        Console.ReadKey();
+                        Menu();
+                        break;
+
+                }
             }
-            Console.Clear();
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+
+
         }
 
         static void Sum(double num1, double num2)
