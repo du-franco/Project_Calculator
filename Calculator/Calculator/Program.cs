@@ -35,6 +35,7 @@ namespace Calculator
                     Console.Clear();
                     Menu();
                 }
+
                 Console.WriteLine("Enter the operation: ");
                 operation = Console.ReadLine();
                 if (operation.Length != 1 || !Regex.IsMatch(operation, "^([-+\\/*%])", RegexOptions.IgnoreCase))
@@ -45,7 +46,6 @@ namespace Calculator
                     Menu();
                 }
 
-
                 Console.WriteLine("Enter the second value: ");
                 if (!double.TryParse(Console.ReadLine(), out value2))
                 {
@@ -54,7 +54,6 @@ namespace Calculator
                     Console.Clear();
                     Menu();
                 }
-
 
                 Console.WriteLine("");
 
@@ -119,10 +118,21 @@ namespace Calculator
         }
         static void Divide(double num1, double num2)
         {
-            double result = num1 / num2;
-            Console.WriteLine($"The divide result of {num1} / {num2}, it's the same as {result}");
-            Console.ReadKey();
-            Menu();
+
+            try
+            {
+                if (num2 == 0)
+                    throw new DivideByZeroException();
+                double result = num1 / num2;
+                Console.WriteLine($"The divide result of {num1} / {num2}, it's the same as {result}");
+                Console.ReadKey();
+                Menu();
+            }
+            catch (DivideByZeroException)
+            {
+                Console.WriteLine($"Division of {0} by zero.", num2);
+                Menu();
+            }
         }
         static void Modulo(double num1, double num2)
         {
