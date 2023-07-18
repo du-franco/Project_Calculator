@@ -176,22 +176,27 @@ namespace Calculator
             int number;
             string result = $"{num1} - {num2}";
 
-
-
             Console.Write("Enter the number of elements: ");
             number = int.Parse(Console.ReadLine());
-            for (int i = 0; i < number - 2; i++)
+            if (number < 1)
             {
-
-                fibonacci = num1 + num2;
-                result += $" - {fibonacci}";
-                num1 = num2;
-                num2 = fibonacci;
-
+                Console.WriteLine("Invalid Number! Press any key to continue");
             }
-            Console.WriteLine(result);
-            Console.ReadKey();
-            MainMenu();
+            else
+            {
+                for (int i = 0; i < number - 2; i++)
+                {
+
+                    fibonacci = num1 + num2;
+                    result += $" - {fibonacci}";
+                    num1 = num2;
+                    num2 = fibonacci;
+
+                }
+                Console.WriteLine(result);
+                Console.ReadKey();
+                MainMenu();
+            }
         }
     }
 }
