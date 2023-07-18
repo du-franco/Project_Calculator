@@ -12,7 +12,7 @@ namespace Calculator
         static void Main(string[] args)
         {
             Header();
-            Menu();
+            MainMenu();
         }
 
         public static void Header()
@@ -20,7 +20,34 @@ namespace Calculator
             Console.WriteLine("##### Calculator #####");
         }
 
-        public static void Menu()
+        public static void MainMenu()
+        {
+            int choice = 0;
+
+            Console.WriteLine("Enter the option: ");
+            while (choice != 4)
+
+            {
+                Console.WriteLine("To use the calculator function type 1: ");
+                Console.WriteLine("To use the Fibonacci function type 2: ");
+                Console.WriteLine("To calculate the root type 3: ");
+                Console.WriteLine("To exit type 4: ");
+                choice = int.Parse(Console.ReadLine());
+
+                if (choice == 1)
+                {
+                    OperationsMenu();
+                }
+                if (choice == 2)
+                {
+                    Fibonacci();
+                }
+
+                Console.ReadLine();
+            }
+        }
+
+        public static void OperationsMenu()
         {
             double value1, value2;
             string operation;
@@ -33,7 +60,7 @@ namespace Calculator
                     Console.WriteLine("Invalid Number! Press any key to continue");
                     Console.ReadLine();
                     Console.Clear();
-                    Menu();
+                    MainMenu();
                 }
 
                 Console.WriteLine("Enter the operation: ");
@@ -43,7 +70,7 @@ namespace Calculator
                     Console.WriteLine("Invalid operator! Press any key to continue");
                     Console.ReadLine();
                     Console.Clear();
-                    Menu();
+                    MainMenu();
                 }
 
                 Console.WriteLine("Enter the second value: ");
@@ -52,7 +79,7 @@ namespace Calculator
                     Console.WriteLine("Invalid Number! Press any key to continue");
                     Console.ReadLine();
                     Console.Clear();
-                    Menu();
+                    MainMenu();
                 }
 
                 Console.WriteLine("");
@@ -82,7 +109,7 @@ namespace Calculator
                     default:
                         Console.WriteLine("Non-existent option!");
                         Console.ReadKey();
-                        Menu();
+                        MainMenu();
                         break;
 
                 }
@@ -100,21 +127,21 @@ namespace Calculator
             double result = num1 + num2;
             Console.WriteLine($"The sum result of {num1} + {num2}, it's the same as {result}");
             Console.ReadKey();
-            Menu();
+            MainMenu();
         }
         static void Subtraction(double num1, double num2)
         {
             double result = num1 - num2;
             Console.WriteLine($"The subtraction result of {num1} - {num2}, it's the same as {result}");
             Console.ReadKey();
-            Menu();
+            MainMenu();
         }
         static void Multiplication(double num1, double num2)
         {
             double result = num1 * num2;
             Console.WriteLine($"The multiplication result of {num1} * {num2}, it's the same as {result}");
             Console.ReadKey();
-            Menu();
+            MainMenu();
         }
         static void Divide(double num1, double num2)
         {
@@ -126,12 +153,12 @@ namespace Calculator
                 double result = num1 / num2;
                 Console.WriteLine($"The divide result of {num1} / {num2}, it's the same as {result}");
                 Console.ReadKey();
-                Menu();
+                MainMenu();
             }
             catch (DivideByZeroException)
             {
                 Console.WriteLine($"Division of {0} by zero.", num2);
-                Menu();
+                MainMenu();
             }
         }
         static void Modulo(double num1, double num2)
@@ -139,7 +166,32 @@ namespace Calculator
             double result = num1 % num2;
             Console.WriteLine($"The modulo result of {num1} % {num2}, it's the same as {result}");
             Console.ReadKey();
-            Menu();
+            MainMenu();
+        }
+        static void Fibonacci()
+        {
+            int num1 = 0;
+            int num2 = 1;
+            int fibonacci;
+            int number;
+            string result = $"{num1} - {num2}";
+
+
+
+            Console.Write("Enter the number of elements: ");
+            number = int.Parse(Console.ReadLine());
+            for (int i = 0; i < number - 2; i++)
+            {
+
+                fibonacci = num1 + num2;
+                result += $" - {fibonacci}";
+                num1 = num2;
+                num2 = fibonacci;
+
+            }
+            Console.WriteLine(result);
+            Console.ReadKey();
+            MainMenu();
         }
     }
 }
