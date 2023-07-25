@@ -28,9 +28,9 @@ namespace Calculator
             while (choice != 4)
 
             {
-                Console.WriteLine("To use the calculator function type 1: ");
+                Console.WriteLine("To use the Calculator function type 1: ");
                 Console.WriteLine("To use the Fibonacci function type 2: ");
-                Console.WriteLine("To calculate the root type 3: ");
+                Console.WriteLine("To calculate the Root type 3: ");
                 Console.WriteLine("To exit type 4: ");
                 choice = int.Parse(Console.ReadLine());
 
@@ -42,8 +42,13 @@ namespace Calculator
                 {
                     Fibonacci();
                 }
+                if (choice == 3)
+                {
+                    Root();
+                }
 
                 Console.ReadLine();
+                Console.Clear();
             }
         }
 
@@ -196,6 +201,65 @@ namespace Calculator
                 Console.WriteLine(result);
                 Console.ReadKey();
                 MainMenu();
+            }
+        }
+        static void Root()
+        {
+            double squareRoot, cubicRoot, value;
+            string roots;
+
+            try
+            {
+                Console.WriteLine("Enter the value of a number: ");
+                if (!double.TryParse(Console.ReadLine(), out value))
+                {
+                    Console.WriteLine("Invalid Number! Press any key to continue");
+                    Console.ReadLine();
+                    Console.Clear();
+                    MainMenu();
+                }
+
+                Console.WriteLine("Enter the root: ");
+                roots = Console.ReadLine();
+                if (roots.Length != 1 || !Regex.IsMatch(roots, "^([2/3])", RegexOptions.IgnoreCase))
+                {
+                    Console.WriteLine("Invalid root! Press any key to continue");
+                    Console.ReadLine();
+                    Console.Clear();
+                    MainMenu();
+                }
+
+                Console.WriteLine("");
+
+                switch (roots)
+                {
+                    case "2":
+                        squareRoot = Math.Sqrt(value);
+                        Console.WriteLine("The value of square cube root is: " + squareRoot);
+                        Console.WriteLine();
+                        Console.Write("Press any key to continue. . . ");
+                        Console.ReadKey();
+                        break;
+
+                    case "3":
+                        cubicRoot = Math.Pow(value, 1.0 / 3.0);
+                        Console.WriteLine("The value of the cube root is: " + cubicRoot);
+                        Console.WriteLine();
+                        Console.Write("Press any key to continue. . . ");
+                        Console.ReadKey();
+                        break;
+
+                    default:
+                        Console.WriteLine("Non-existent option!");
+                        Console.ReadKey();
+                        MainMenu();
+                        break;
+
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
             }
         }
     }
