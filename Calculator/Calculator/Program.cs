@@ -25,7 +25,7 @@ namespace Calculator
             int choice = 0;
 
             Console.WriteLine("Enter the option: ");
-            while (choice != 4)
+            while (choice != 3)
 
             {
                 Console.WriteLine("To use the Calculator function type 1: ");
@@ -46,9 +46,14 @@ namespace Calculator
                 {
                     Root();
                 }
+                if (choice != 3)
+                {
+                    MainMenu();
+                }
 
                 Console.ReadLine();
                 Console.Clear();
+                MainMenu();
             }
         }
 
