@@ -25,13 +25,14 @@ namespace Calculator
             int choice = 0;
 
             Console.WriteLine("Enter the option: ");
-            while (choice != 3)
+            while (choice != 4)
 
             {
                 Console.WriteLine("To use the Calculator function type 1: ");
                 Console.WriteLine("To use the Fibonacci function type 2: ");
                 Console.WriteLine("To calculate the Root type 3: ");
-                Console.WriteLine("To exit type 4: ");
+                Console.WriteLine("To calculae the Exponentiation type 4: ");
+                Console.WriteLine("To exit type 5: ");
                 choice = int.Parse(Console.ReadLine());
 
                 if (choice == 1)
@@ -46,14 +47,17 @@ namespace Calculator
                 {
                     Root();
                 }
-                if (choice != 3)
+                if (choice == 4)
+                {
+                    Pow();
+                }
+                if (choice != 4)
                 {
                     MainMenu();
                 }
 
                 Console.ReadLine();
                 Console.Clear();
-                MainMenu();
             }
         }
 
@@ -261,6 +265,43 @@ namespace Calculator
                         break;
 
                 }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+        }
+        static void Pow()
+        {
+            double value1, value2, result;
+            
+
+            try
+            {
+                Console.WriteLine("Enter the base value: ");
+                if (!double.TryParse(Console.ReadLine(), out value1))
+                {
+                    Console.WriteLine("Invalid Number! Press any key to continue");
+                    Console.ReadLine();
+                    Console.Clear();
+                    MainMenu();
+                }
+
+                Console.WriteLine("Enter the exponent: ");
+                if (!double.TryParse(Console.ReadLine(), out value2))
+                {
+                    Console.WriteLine("Invalid Number! Press any key to continue");
+                    Console.ReadLine();
+                    Console.Clear();
+                    MainMenu();
+                }
+
+                result = Math.Pow(value1, value2);
+                Console.WriteLine("The result of exponentiation is: " + result);
+                Console.ReadLine();
+                Console.Clear();
+                MainMenu();
+
             }
             catch (Exception ex)
             {
